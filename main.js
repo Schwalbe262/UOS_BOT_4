@@ -13,7 +13,7 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
 // ==================== 모듈 ==========================
-const UOSP = require("UOSP.js")
+//const UOSP = require("UOSP.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -117,7 +117,7 @@ Git = function() {
 					str += tmp+"\n";
 				}
 				br.close();
-				saveFile(filelist[i].path.substr(1) , str)
+				saveFile(folderpath+filelist[i].path , str)
 			}
 		}
 	}
@@ -221,7 +221,8 @@ timer = new (function(){ // 타이머
 function saveFile(file, str) {
 	//var filedir = new java.io.File("/sdcard/kbot/"+ file);
 	//var filedir = new java.io.File("/sdcard/ChatBot/BotData/시립"+ file);
-	var filedir = new java.io.File("/sdcard/katalkbot/"+ file);
+	var path = (file[0]=="/") ? file : "/sdcard/katalkbot/"+ file
+	var filedir = new java.io.File(path);
 	try {
 		var bw = new java.io.BufferedWriter(new java.io.FileWriter(filedir));
 		bw.write(str.toString());
@@ -234,3 +235,28 @@ function saveFile(file, str) {
 //=============================================================================================================================
 //==========================================   Git class 종료    ==============================================================
 //=============================================================================================================================
+
+Object.defineProperty(Object.prototype,"$",   {
+	get:function(){
+		var self=this;
+		return Object.getOwnPropertyNames(this).map(v=>{
+			try{
+				return v+" : "+self[v]
+			}catch(e){ }
+			return v+" : error"
+
+		}).join("\n");
+	}
+});
+
+Object.defineProperty(Object.prototype,"$$",   {
+	get:function(){
+		var self=this;
+		return Object.getOwnPropertyNames(this.__proto__).map(v=>{
+			try{
+				return v+" : "+self[v]
+			}catch(e){ }
+			return v+" : error"
+		}).join("\n");
+	}
+});
