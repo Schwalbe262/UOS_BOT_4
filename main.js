@@ -11,6 +11,7 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 // ==================== 모듈 ==========================
 const UOSP = require("UOSP.js")
+const Git = require("Git.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -61,112 +62,6 @@ String.prototype.encoding=function(){
 //=============================================================================================================================
 
 
-//=============================================================================================================================
-//=============================================   Git class    ================================================================
-//=============================================================================================================================
-Git = function() {
-
-	//Constructor//
-	function Git(){
-	}
-	//Git.ignore_list = getDB("ignore_update").split("\n") //update시 내려받지 않을 파일들의 이름 리스트
-	Git.ignore_list=[]
-
-	Git.getFileList = function(gitlink) {
-		//정보 추출경로로 변형
-		var gitlink = gitlink.includes("/file-list/master") ? gitlink : gitlink+"/file-list/master" //TODO - 이름이 file-list/master일수도 있으니 정규화 하자
-		//연결
-		var html = org.jsoup.Jsoup.connect(gitlink).get()
-		//파싱
-		var typelist = html.select(".js-active-navigation-container").select("td[class=icon]").select("svg").eachAttr("class").toArray().slice(1)
-		var namelist = html.select(".js-active-navigation-container").select("td[class=content]").select("a").eachText().toArray().slice()
-		var pathlist = html.select(".js-active-navigation-container").select("td[class=content]").select("a").eachAttr("href").toArray().slice()
-		var checklist = html.select(".js-active-navigation-container").select("td[class=message]").toArray().map(v=>v.selectFirst("a").attr("href"))
-		var filelist = []
-
-		for(var i=0; i<namelist.length;i++){
-			//js string 화
-			typelist[i] = String(typelist[i])
-			namelist[i] = String(namelist[i])
-			pathlist[i] = String(pathlist[i])
-			checklist[i] = String(checklist[i])
-			//데이터 추출
-			if(typelist[i] == "octicon octicon-file-directory"){
-				typelist[i] = "folder"
-			}
-			else if(typelist[i] == "octicon octicon-file"){
-				typelist[i] = "file"
-			}
-			else {
-				typelist[i] = "other" //??
-			}
-			pathlist[i] = pathlist[i].substr(pathlist[i].indexOf("/master/")+7)
-			checklist[i] = checklist[i].substr(checklist[i].indexOf("/commit/")+8)
-			//파일 객체로 변환
-			var file = {type: typelist[i], name : namelist[i] , path : pathlist[i] , check : checklist[i] }
-			filelist.push(file)
-		}
-
-		for  (var i=0;i<filelist.length;i++ ) { //재귀로 폴더 탐사
-
-
-			if(filelist[i].type == "folder") {
-				var newlink = gitlink + "/"+filelist[i].name
-				filelist[i] = Git.getFileList(newlink)
-			}
-		}
-
-		return flatten(filelist)
-	}
-
-	Git.pull = function(gitlink, folderpath) {
-		var filelist = Git.getFileList(gitlink)
-		for(var i = 0; i<filelist.length ; i++ ) {
-			if(filelist[i].type == "file" && !Git.ignore_list.includes(filelist[i].name)){
-				var rawlink = "https://raw.githubusercontent.com"+gitlink.substr(gitlink.indexOf("github.com")+10) +"/"+ filelist[i].check + filelist[i].path
-				var conn = new java.net.URL(rawlink).openConnection();
-				conn.setRequestProperty("Content-Type", "text/xml;charset=utf-8");
-				var is=conn.getInputStream();
-				var br=new java.io.BufferedReader(new java.io.InputStreamReader(is));
-				var str = ''
-				var tmp=null;
-				while (((tmp = br.readLine()) != null)) {
-					str += tmp+"\n";
-				}
-				br.close();
-				saveFile(filelist[i].path.substr(1) , str)
-			}
-		}
-	}
-
-	Git.showme = function(arr) {
-		msg2 = ''
-		for(var i=0;i<arr.length;i++) {
-			msg = i+".\n"+"type: " + arr[i].type + "\n"+"name: " + arr[i].name + "\n"+"path: " + arr[i].path + "\n"+"checksum: " + arr[i].check ;
-			msg2 += msg +"\n\n"
-
-		}
-		Api.replyRoom(console_room_name,msg2)
-	}
-
-	return Git
-
-}()
-
-Object.defineProperty(Array.prototype,"includes",	{
-	value:function(target){
-		return this.indexOf(target)!=-1
-	}
-});
-
-function flatten(arr) {
-	return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
-}
-
-//Git class//
-//-----------------------------------------------------------------------------------------------------------------------------
-
-
 
 function update() {
 	timer.start();
@@ -208,13 +103,13 @@ wake=(function() {
 		on :function(){
 			if(!wl.isHeld()){
 				wl.acquire();
-				Api.replyRoom(admin,"cpu온");
+				Api.replyRoom(console_room_name,"cpu온");
 			}
 		},
 		off:function(){
 			if(wl.isHeld()){
 				wl.release();
-				Api.replyRoom(admin,"cpu오프");
+				Api.replyRoom(console_room_name,"cpu오프");
 			}
 		},
 		toString: function(){
