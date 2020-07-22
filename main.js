@@ -1,6 +1,6 @@
 const scriptName = "index.js"
 
-const message = "웅앙맨외에 신은 없고 흰머리오목눈이는 그의 사도다."
+const message = "웅앙맨외에 신은 없고 흰머리오목눈이는 그의 사도다. UAM"
 
 var PM=android.os.PowerManager;
 var pm =Api.getContext().getSystemService(android.content.Context.POWER_SERVICE);
