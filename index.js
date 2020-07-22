@@ -1,6 +1,35 @@
 const scriptName = "index.js"
 
+var PM=android.os.PowerManager;
+var pm =Api.getContext().getSystemService(android.content.Context.POWER_SERVICE);
+var wl = pm.newWakeLock(PM.SCREEN_BRIGHT_WAKE_LOCK|PM.ACQUIRE_CAUSES_WAKEUP |PM.ON_AFTER_RELEASE,"FAIL");
+
+
+// ================= 방 관련 변수들 ====================
 const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
+
+
+function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
+
+
+	try {
+		// eval 코드
+		if(msg.indexOf(">")==0){
+			replier.reply(">"+new String(eval(msg.substring(1))).encoding());
+		}
+	}
+	catch(e) {
+		Api.replyRoom(console_room_name, "Response Error\n" + e + "\n" + e.stack + "\n" + e.rhinoException);
+	}
+
+
+
+}
+
+
+//=============================================================================================================================
+//================================================   eval    ==================================================================
+//=============================================================================================================================
 
 // eval 코드
 String.prototype.encoding=function(){
@@ -9,28 +38,25 @@ String.prototype.encoding=function(){
 	while(tmp=/\\u[\da-fA-F]{4}/.exec(res)){
 		res=res.replace(tmp[0],String.fromCharCode(parseInt(tmp[0].substring(2),16)));
 	}
+
 	return res;
 }
 
-function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
-
-	// eval 코드
-	if(msg.indexOf(">")==0){
-		//replier.reply(eval(msg).toString().encoding())
-		replier.reply(">"+new String(eval(msg.substring(1))).encoding());
-	}
-
-}
+//=============================================================================================================================
+//=============================================   eval 종료    ================================================================
+//=============================================================================================================================
 
 
-//-----------------------------------------------------------------------------------------------------------------------------
-//Git class//
+//=============================================================================================================================
+//=============================================   Git class    ================================================================
+//=============================================================================================================================
 Git = function() {
 
 	//Constructor//
 	function Git(){
 	}
-	Git.ignore_list = getDB("ignore_update").split("\n") //update시 내려받지 않을 파일들의 이름 리스트
+	//Git.ignore_list = getDB("ignore_update").split("\n") //update시 내려받지 않을 파일들의 이름 리스트
+	Git.ignore_list=[]
 
 	Git.getFileList = function(gitlink) {
 		//정보 추출경로로 변형
@@ -106,12 +132,22 @@ Git = function() {
 			msg2 += msg +"\n\n"
 
 		}
-		Api.replyRoom("봇장난",msg2)
+		Api.replyRoom(console_room_name,msg2)
 	}
 
 	return Git
 
 }()
+
+Object.defineProperty(Array.prototype,"includes",	{
+	value:function(target){
+		return this.indexOf(target)!=-1
+	}
+});
+
+function flatten(arr) {
+	return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
+}
 
 //Git class//
 //-----------------------------------------------------------------------------------------------------------------------------
@@ -127,14 +163,77 @@ function update() {
 	var msg = "time : " + java.lang.String.format("%.2f",time/1000) + "sec";
 	Api.replyRoom(console_room_name,msg);
 
-	setDB("KOSPI_reference",KOSPI_reference)
-	setDB("NASDAQ_reference",NASDAQ_reference)
-	setDB("KOSDAQ_reference",KOSDAQ_reference)
-	setDB("KOSPI_log",KOSPI_log)
-	setDB("NASDAQ_log",NASDAQ_log)
-	setDB("KOSDAQ_log",KOSDAQ_log)
-
-	Api.replyRoom("봇장난","웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다. 2020/07/17");
+	Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다. 2020/07/17");
 
 	return ""
 }
+
+function reload () { // 코드 리로드
+	timer.start();
+	//switcher=0;
+	Api.replyRoom(console_room_name,"리로드 시작...");
+	wake.on();
+	try{
+		Api.reload();
+	}catch(e){
+		Api.replyRoom(console_room_name,e + "\n" + e.stack);
+	}
+	wake.off();
+	var time = timer.end();
+	Api.replyRoom(admin,"리로드 완료!");
+	msg = "경과시간: " + java.lang.String.format("%.2f",time/1000) + "초";
+	Api.replyRoom(console_room_name,msg);
+}
+
+wake=(function() {
+	var PM=android.os.PowerManager;
+	var pm =Api.getContext().getSystemService(android.content.Context.POWER_SERVICE);
+
+	var wl= pm.newWakeLock(PM.SCREEN_DIM_WAKE_LOCK|PM.ACQUIRE_CAUSES_WAKEUP |PM.ON_AFTER_RELEASE,"FAIL");
+	return {
+		on :function(){
+			if(!wl.isHeld()){
+				wl.acquire();
+				Api.replyRoom(admin,"cpu온");
+			}
+		},
+		off:function(){
+			if(wl.isHeld()){
+				wl.release();
+				Api.replyRoom(admin,"cpu오프");
+			}
+		},
+		toString: function(){
+			return wl.toString();
+		}
+	}
+})();
+
+timer = new (function(){ // 타이머
+	var low=new Date();
+	return {
+		start : function() {
+			low = new Date();
+		},
+		end : function() {
+			var present = new Date;
+			return present - low;
+		}
+	}})();
+
+function saveFile(file, str) {
+	//var filedir = new java.io.File("/sdcard/kbot/"+ file);
+	//var filedir = new java.io.File("/sdcard/ChatBot/BotData/시립"+ file);
+	var filedir = new java.io.File("/sdcard/katalkbot/"+ file);
+	try {
+		var bw = new java.io.BufferedWriter(new java.io.FileWriter(filedir));
+		bw.write(str.toString());
+		bw.close();
+	} catch (e) {
+		return e;
+	}
+}
+
+//=============================================================================================================================
+//==========================================   Git class 종료    ==============================================================
+//=============================================================================================================================
