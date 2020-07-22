@@ -265,7 +265,7 @@ function require(src,force){
 	else{
 		var module = {exports:{}}
 		var exports=module.exports
-		Log.d( eval(readFile("node_modules/"+src)) )
+		eval(readFile("node_modules/"+src))
 		cacheModule[src] = module.exports;
 		return module.exports
 	}
