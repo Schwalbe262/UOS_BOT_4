@@ -13,7 +13,7 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
 // ==================== 모듈 ==========================
-const UOSP = require("UOSP.js")
+UOSP = require("UOSP.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -241,6 +241,7 @@ function readFile(file) {
 		while (((str = br.readLine()) != null)) {
 			readStr += str + "\n";
 		}
+		Log.d( readStr )
 		br.close();
 		return readStr.trim();
 	} catch (e) {
@@ -258,7 +259,7 @@ function require(src,force){
 	else{
 		var module = {exports:{}}
 		var exports=module.exports
-		eval(readFile("node_modules/"+src))
+		Log.d( eval(readFile("node_modules/"+src)) )
 		cacheModule[src] = module.exports;
 		return module.exports
 	}
