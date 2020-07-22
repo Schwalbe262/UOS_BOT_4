@@ -13,10 +13,20 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 
 	try {
+
+
 		// eval 코드
 		if(msg.indexOf(">")==0){
 			replier.reply(">"+new String(eval(msg.substring(1))).encoding());
 		}
+
+		if(msg=="test"){
+			replier.reply("웅앙맨 외에 신은 없고 흰머리오목눈이는 그의 사도다.")
+		}
+
+
+
+
 	}
 	catch(e) {
 		Api.replyRoom(console_room_name, "Response Error\n" + e + "\n" + e.stack + "\n" + e.rhinoException);
