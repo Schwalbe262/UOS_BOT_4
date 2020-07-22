@@ -7,13 +7,14 @@ var PM=android.os.PowerManager;
 var pm =Api.getContext().getSystemService(android.content.Context.POWER_SERVICE);
 var wl = pm.newWakeLock(PM.SCREEN_BRIGHT_WAKE_LOCK|PM.ACQUIRE_CAUSES_WAKEUP |PM.ON_AFTER_RELEASE,"FAIL");
 
+var cacheModule={} // require 관련 변수
 
 // ================= 방 관련 변수들 ====================
 const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
 // ==================== 모듈 ==========================
-UOSP = require("UOSP.js")
+const UOSP = require("UOSP.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -241,7 +242,6 @@ function readFile(file) {
 		while (((str = br.readLine()) != null)) {
 			readStr += str + "\n";
 		}
-		Log.d( readStr )
 		br.close();
 		return readStr.trim();
 	} catch (e) {
@@ -253,22 +253,16 @@ function readFile(file) {
 //==========================================   Git class 종료    ==============================================================
 //=============================================================================================================================
 
-var cacheModule={}
+
 function require(src,force){
-	Log.d("require 1번")
 	if(!force && cacheModule[src]!=undefined){
 		return cacheModule[src];
 	}
-	("require 2번")
 	else{
 		var module = {exports:{}}
-		Log.d("require 3번")
 		var exports=module.exports
-		Log.d("require 4번")
 		Log.d( eval(readFile("node_modules/"+src)) )
-		Log.d("require 5번")
 		cacheModule[src] = module.exports;
-		Log.d("require 6번")
 		return module.exports
 	}
 }
