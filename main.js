@@ -1,6 +1,6 @@
 const scriptName = "index.js"
 
-const message = "웅앙맨외에 신은 없고 흰머리오목눈이는 그의 사도다. UAM"
+const message = "웅앙맨외에 신은 없고 흰머리오목눈이는 그의 사도다."
 
 var PM=android.os.PowerManager;
 var pm =Api.getContext().getSystemService(android.content.Context.POWER_SERVICE);
@@ -12,7 +12,7 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
 // ==================== 모듈 ==========================
-const UOSP = require("UOSP.js")
+//const UOSP = require("UOSP.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -84,7 +84,7 @@ Git = function() {
 				rawType.includes("octicon-file") ? "file" : "other"
 			var rowheader = v.selectFirst("div[role=rowheader] a")
 			var name = String(rowheader.text())
-			var path = String(rowheader.attr("href")).split("/master/").slice(1).join("/master/")
+			var path = String(rowheader.attr("href")).split("/master").slice(1).join("/master")
 			var check = String(v.selectFirst("div.commit-message a").attr("href")).split("/commit/").slice(1).join("/commit/")
 			return {type:type, name:name, path:path, check:check}
 		})
