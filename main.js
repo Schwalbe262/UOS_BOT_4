@@ -221,7 +221,7 @@ timer = new (function(){ // 타이머
 function saveFile(file, str) {
 	//var filedir = new java.io.File("/sdcard/kbot/"+ file);
 	//var filedir = new java.io.File("/sdcard/ChatBot/BotData/시립"+ file);
-	var path = (file[0]=="/") ? file : "/sdcard/katalkbot/"+ file
+	var path = (file[0]=="/") ? file : "/sdcard/katalkbot/Bots/main/"+ file
 	var filedir = new java.io.File(path);
 	try {
 		var bw = new java.io.BufferedWriter(new java.io.FileWriter(filedir));
@@ -233,7 +233,7 @@ function saveFile(file, str) {
 }
 
 function readFile(file) {
-	var filedir = new java.io.File("/sdcard/katalkbot/"+  file);
+	var filedir = new java.io.File("/sdcard/katalkbot/Bots/main/"+  file);
 	try {
 		var br = new java.io.BufferedReader(new java.io.FileReader(filedir));
 		var readStr = "";
