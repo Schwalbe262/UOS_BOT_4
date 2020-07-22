@@ -1,5 +1,7 @@
 const scriptName = "index.js"
 
+const message = "웅앙맨외에 신은 없고 흰머리오목눈이는 그의 사도다."
+
 var PM=android.os.PowerManager;
 var pm =Api.getContext().getSystemService(android.content.Context.POWER_SERVICE);
 var wl = pm.newWakeLock(PM.SCREEN_BRIGHT_WAKE_LOCK|PM.ACQUIRE_CAUSES_WAKEUP |PM.ON_AFTER_RELEASE,"FAIL");
