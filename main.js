@@ -255,12 +255,18 @@ function readFile(file) {
 
 var cacheModule={}
 function require(src,force){
+	Log.d("require 1번")
 	if(!force && cacheModule[src]!=undefined) return cacheModule[src];
+	Log.d("require 2번")
 	else{
 		var module = {exports:{}}
+		Log.d("require 3번")
 		var exports=module.exports
+		Log.d("require 4번")
 		Log.d( eval(readFile("node_modules/"+src)) )
+		Log.d("require 5번")
 		cacheModule[src] = module.exports;
+		Log.d("require 6번")
 		return module.exports
 	}
 }
