@@ -236,6 +236,18 @@ function saveFile(file, str) {
 //==========================================   Git class 종료    ==============================================================
 //=============================================================================================================================
 
+var cacheModule={}
+function require(src,force){
+	if(!force && cacheModule[src]!=undefined) return cacheModule[src];
+	else{
+		var module = {exports:{}}
+		var exports=module.exports
+		eval(readFile("node_modules/"+src))
+		cacheModule[src] = module.exports;
+		return module.exports
+	}
+}
+
 Object.defineProperty(Object.prototype,"$",   {
 	get:function(){
 		var self=this;
