@@ -91,7 +91,7 @@ Git = function() {
 
 		filelist = filelist.map(v=>{
 			if (v.type == "folder") {
-				var newlink = gitlink + "/" + filelist[i].name;
+				var newlink = gitlink + "/" + v.name;
 				return Git.getFileList(newlink);
 			}else{
 				return v
