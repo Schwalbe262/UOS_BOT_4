@@ -9,6 +9,10 @@ var wl = pm.newWakeLock(PM.SCREEN_BRIGHT_WAKE_LOCK|PM.ACQUIRE_CAUSES_WAKEUP |PM.
 const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
+// ==================== 모듈 ==========================
+const UOSP = require("UOSP.js")
+
+
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
 
 
