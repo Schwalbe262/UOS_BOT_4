@@ -13,7 +13,7 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
 // ==================== 모듈 ==========================
-const UOSP = require("UOSP.js")
+const UOSP = require("/node_modules/UOSP.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
