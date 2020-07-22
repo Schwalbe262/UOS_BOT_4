@@ -11,7 +11,6 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 // ==================== 모듈 ==========================
 const UOSP = require("UOSP.js")
-const Git = require("Git.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -60,6 +59,92 @@ String.prototype.encoding=function(){
 //=============================================================================================================================
 //=============================================   eval 종료    ================================================================
 //=============================================================================================================================
+
+
+//=============================================================================================================================
+//=============================================   Git class    ================================================================
+//=============================================================================================================================
+Git = function() {
+
+	//Constructor//
+	function Git(){
+	}
+	//Git.ignore_list = getDB("ignore_update").split("\n") //update시 내려받지 않을 파일들의 이름 리스트
+	Git.ignore_list=[]
+
+	Git.getFileList = function(gitlink) {
+		var gitlink = gitlink.includes("/file-list/master") ? gitlink : gitlink + "/file-list/master";
+		var html = org.jsoup.Jsoup.connect(gitlink).get();
+
+		var filelist = html.select("div.Box-row.py-2").toArray().map(v=>{
+			var rawType = String(v.selectFirst("svg").attr("class"))
+			var type = rawType.includes("octicon-file-directory") ? "folder" :
+				rawType.includes("octicon-file") ? "file" : "other"
+			var rowheader = v.selectFirst("div[role=rowheader] a")
+			var name = String(rowheader.text())
+			var path = String(rowheader.attr("href")).split("/master/").slice(1).join("/master/")
+			var check = String(v.selectFirst("div.commit-message a").attr("href")).split("/commit/").slice(1).join("/commit/")
+			return {type:type, name:name, path:path, check:check}
+		})
+
+		filelist = filelist.map(v=>{
+			if (v.type == "folder") {
+				var newlink = gitlink + "/" + filelist[i].name;
+				return Git.getFileList(newlink);
+			}else{
+				return v
+			}
+		})
+
+		return flatten(filelist);
+	}
+
+	Git.pull = function(gitlink, folderpath) {
+		var filelist = Git.getFileList(gitlink)
+		for(var i = 0; i<filelist.length ; i++ ) {
+			if(filelist[i].type == "file" && !Git.ignore_list.includes(filelist[i].name)){
+				var rawlink = "https://raw.githubusercontent.com"+gitlink.substr(gitlink.indexOf("github.com")+10) +"/"+ filelist[i].check + filelist[i].path
+				var conn = new java.net.URL(rawlink).openConnection();
+				conn.setRequestProperty("Content-Type", "text/xml;charset=utf-8");
+				var is=conn.getInputStream();
+				var br=new java.io.BufferedReader(new java.io.InputStreamReader(is));
+				var str = ''
+				var tmp=null;
+				while (((tmp = br.readLine()) != null)) {
+					str += tmp+"\n";
+				}
+				br.close();
+				saveFile(filelist[i].path.substr(1) , str)
+			}
+		}
+	}
+
+	Git.showme = function(arr) {
+		msg2 = ''
+		for(var i=0;i<arr.length;i++) {
+			msg = i+".\n"+"type: " + arr[i].type + "\n"+"name: " + arr[i].name + "\n"+"path: " + arr[i].path + "\n"+"checksum: " + arr[i].check ;
+			msg2 += msg +"\n\n"
+
+		}
+		Api.replyRoom(console_room_name,msg2)
+	}
+
+	return Git
+
+}()
+
+Object.defineProperty(Array.prototype,"includes",	{
+	value:function(target){
+		return this.indexOf(target)!=-1
+	}
+});
+
+function flatten(arr) {
+	return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
+}
+
+//Git class//
+//-----------------------------------------------------------------------------------------------------------------------------
 
 
 
