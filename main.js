@@ -14,7 +14,8 @@ const console_room_name = "시립봇4 콘솔방" // 콘솔방 이름
 
 
 // ==================== 모듈 ==========================
-const UOSP = require("UOSP.js")
+UOSP = require("UOSP.js")
+Git = require("Git.js")
 
 
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName){
@@ -68,6 +69,7 @@ String.prototype.encoding=function(){
 //=============================================================================================================================
 //=============================================   Git class    ================================================================
 //=============================================================================================================================
+/*
 Git = function() {
 
 	//Constructor//
@@ -146,6 +148,8 @@ Object.defineProperty(Array.prototype,"includes",	{
 function flatten(arr) {
 	return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
 }
+*/
+
 
 //Git class//
 //-----------------------------------------------------------------------------------------------------------------------------
