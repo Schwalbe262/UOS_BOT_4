@@ -177,7 +177,7 @@ function update() {
 	var msg = "time : " + java.lang.String.format("%.2f",time/1000) + "sec";
 	Api.replyRoom(console_room_name,msg);
 
-	Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다. 2020/07/17");
+	Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다.");
 
 	return ""
 }
@@ -194,7 +194,7 @@ function reload () { // 코드 리로드
 	}
 	wake.off();
 	var time = timer.end();
-	Api.replyRoom(admin,"리로드 완료!");
+	Api.replyRoom(console_room_name,"리로드 완료!");
 	msg = "경과시간: " + java.lang.String.format("%.2f",time/1000) + "초";
 	Api.replyRoom(console_room_name,msg);
 }
