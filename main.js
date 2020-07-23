@@ -240,7 +240,7 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 
 				try{
 					var date = new Date();
-					if( date.getHours()>8 || date.getHours()<22 ){
+					if( date.getHours()>8 && date.getHours()<22 ){
 						UOSP.UOSP1()
 					}
 				}
@@ -281,7 +281,7 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 					if( (date.getHours()==11||date.getHours()==14||date.getHours()==17) && SW == 0 ){
 						SW = 1
 					}
-					if( date.getHours()>8 || date.getHours()<22 ){
+					if( date.getHours()>8 && date.getHours()<22 ){
 						UOSP.UOS_temp_controller("1")
 						UOSP.UOS_temp_controller("2")
 						UOSP.UOS_temp_controller("3")
