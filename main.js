@@ -242,7 +242,7 @@ UOSP1 = new java.lang.Thread(new java.lang.Runnable(){
 					//if( date.getHours()>8 || date.getHours()<22 ){
 					if(true){
 						UOSP.UOSP1()
-						Api.replyRoom(console_room_name,"UOSP1 실행"+e.rhinoException);
+						Api.replyRoom(console_room_name,"UOSP1 실행");
 					}
 				}
 				catch(e){
