@@ -226,7 +226,7 @@ Object.defineProperty(Object.prototype,"$$",   {
 
 var switcher = 1 // 스레드 통제 관련 변수 (0되면 모두 OFF)
 
-UOSP1 = new java.lang.Thread(new java.lang.Runnable(){
+UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 	run:function(){
 		switcher = 1
 		//var is_printed = false
@@ -258,7 +258,7 @@ UOSP1 = new java.lang.Thread(new java.lang.Runnable(){
 			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 종료")
 		}
 	}
-}, "katalkbot_thread_UOSP1");
+}), "katalkbot_thread_UOSP1");
 
 
 
