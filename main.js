@@ -37,6 +37,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		if(msg.indexOf("/공지검색")==0){
 			replier.reply(UOSP.UOSP1_search(msg.substr(6)))
 		}
+		if(msg.indexOf("/시갤검색")==0){
+			replier.reply(DCP.UOS_search(msg.substr(6)))
+		}
 
 
 
