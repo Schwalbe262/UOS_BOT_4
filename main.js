@@ -243,7 +243,6 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 					if(true){
 						Api.replyRoom(console_room_name,"UOSP1 실행 시작");
 						UOSP.UOSP1()
-						Api.replyRoom(console_room_name,msg);
 					}
 				}
 				catch(e){
