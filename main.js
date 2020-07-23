@@ -246,6 +246,7 @@ UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 					}
 				}
 				catch(e){
+					Api.replyRoom(console_room_name,"일반공지 파싱 스레드 error\n"+e + "\n" + e.stack + "\n"+e.rhinoException);
 					java.lang.Thread.sleep(30000)
 				}
 
