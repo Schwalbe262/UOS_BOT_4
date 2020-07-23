@@ -12,6 +12,7 @@ const console_room_name = "시립봇4 컨트롤방" // 콘솔방 이름
 
 // ==================== 모듈 ==========================
 UOSP = require("UOSP.js")
+DCP = require("DCP.js")
 Git = require("Git.js")
 D = require("DBManager.js")
 var myDB = android.database.sqlite.SQLiteDatabase.openDatabase("/sdcard/katalkbot/Bots/main/DB", null, android.database.sqlite.SQLiteDatabase.CREATE_IF_NECESSARY);
