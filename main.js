@@ -264,6 +264,7 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 	run:function(){
 		switcher = 1
+		let SW = 0 // 0 : 꺼짐, 1 : 작동대기, 2 : 작동후
 		//var is_printed = false
 		try{
 			Api.replyRoom(console_room_name,"공과대학공지 파싱 스레드 실행")
@@ -274,6 +275,12 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 
 				try{
 					var date = new Date();
+					if( (date.getHours()==12||date.getHours()==15||date.getHours()==18) && SW == 2 ){
+						SW = 0
+					}
+					if( (date.getHours()==11||date.getHours()==14||date.getHours()==17) && SW == 0 ){
+						SW = 1
+					}
 					if( date.getHours()>8 || date.getHours()<22 ){
 						UOSP.UOS_temp_controller("1")
 						UOSP.UOS_temp_controller("2")
@@ -281,6 +288,10 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						UOSP.UOS_temp_controller("4")
 						UOSP.UOS_temp_controller("5")
 						UOSP.UOS_temp_controller("6")
+						if(SW==1){
+							UOSP.UOS_temp_controller("1","ON")
+							SW = 2
+						}
 					}
 				}
 				catch(e){
