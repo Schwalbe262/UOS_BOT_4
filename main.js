@@ -28,6 +28,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		if(start==1){
 			thread_UOSP1.start()
+			thread_UOSP_control.start()
 			Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다.");
 			start=0;
 		}
@@ -244,7 +245,6 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 					}
 				}
 				catch(e){
-					Api.replyRoom(console_room_name,"일반공지 파싱 스레드 error\n"+e + "\n" + e.stack + "\n"+e.rhinoException);
 					java.lang.Thread.sleep(30000)
 				}
 
@@ -258,6 +258,46 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 		}
 	}
 }), "katalkbot_thread_UOSP1");
+
+
+
+thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
+	run:function(){
+		switcher = 1
+		//var is_printed = false
+		try{
+			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 실행")
+			while(1){
+				if(switcher == 0){
+					break
+				}
+
+				try{
+					var date = new Date();
+					//if( date.getHours()>8 || date.getHours()<22 ){
+					if(true){
+						UOSP.UOS_temp_controller("1")
+						UOSP.UOS_temp_controller("2")
+						UOSP.UOS_temp_controller("3")
+						UOSP.UOS_temp_controller("4")
+						UOSP.UOS_temp_controller("5")
+						UOSP.UOS_temp_controller("6")
+					}
+				}
+				catch(e){
+					java.lang.Thread.sleep(30000)
+				}
+
+				java.lang.Thread.sleep(30000) //10sec
+			}
+		}catch(e){
+			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 error\n"+e + "\n" + e.stack + "\n"+e.rhinoException);
+		}
+		finally{
+			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 종료")
+		}
+	}
+}), "katalkbot_thread_UOSP_control");
 
 
 
