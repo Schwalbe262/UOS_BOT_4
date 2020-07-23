@@ -27,7 +27,8 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 	try {
 
 		if(start==1){
-			UOSP1.start()
+			//UOSP1.start()
+			Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다.");
 			start=0;
 		}
 
@@ -96,14 +97,12 @@ function update() {
 	var msg = "time : " + java.lang.String.format("%.2f",time/1000) + "sec";
 	Api.replyRoom(console_room_name,msg);
 
-	Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다.");
-
 	return ""
 }
 
 function reload () { // 코드 리로드
 	timer.start();
-	switcher=0;
+	//switcher=0;
 	Api.replyRoom(console_room_name,"리로드 시작...");
 	wake.on();
 	try{
@@ -223,6 +222,7 @@ Object.defineProperty(Object.prototype,"$$",   {
 });
 
 
+/*
 
 var switcher = 1 // 스레드 통제 관련 변수 (0되면 모두 OFF)
 
@@ -264,6 +264,8 @@ UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 		}
 	}
 }), "katalkbot_thread_UOSP1");
+
+ */
 
 
 
