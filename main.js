@@ -9,6 +9,9 @@ var cacheModule={} // require 관련 변수
 // ================= 방 관련 변수들 ====================
 const console_room_name = "시립봇4 컨트롤방" // 콘솔방 이름
 
+// ================ 시동 관련 변수들 ====================
+var start = 1
+
 
 // ==================== 모듈 ==========================
 UOSP = require("UOSP.js")
@@ -22,6 +25,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 
 	try {
+
+		if(start==1){
+			UOSP1.start()
+			start=0;
+		}
 
 
 		// eval 코드
@@ -95,7 +103,7 @@ function update() {
 
 function reload () { // 코드 리로드
 	timer.start();
-	//switcher=0;
+	switcher=0;
 	Api.replyRoom(console_room_name,"리로드 시작...");
 	wake.on();
 	try{
@@ -213,3 +221,94 @@ Object.defineProperty(Object.prototype,"$$",   {
 		}).join("\n");
 	}
 });
+
+
+
+var switcher = 1 // 스레드 통제 관련 변수 (0되면 모두 OFF)
+
+UOSP1 = new java.lang.Thread(new java.lang.Runnable(){
+	run:function(){
+		switcher = 1
+		//var is_printed = false
+		try{
+			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 실행")
+			while(1){
+				if(switcher == 0){
+					break
+				}
+
+				try{
+					var date = new Date();
+					//if( date.getHours()>8 || date.getHours()<22 ){
+					if(true){
+						UOSP.UOSP1()
+						Api.replyRoom(console_room_name,"UOSP1 실행"+e.rhinoException);
+					}
+				}
+				catch(e){
+					java.lang.Thread.sleep(30000)
+				}
+
+				java.lang.Thread.sleep(30000) //10sec
+			}
+		}catch(e){
+			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 error\n"+e + "\n" + e.stack + "\n"+e.rhinoException);
+		}
+		finally{
+			Api.replyRoom(console_room_name,"일반공지 파싱 스레드 종료")
+		}
+	}
+}, "katalkbot_thread_UOSP1");
+
+
+
+
+
+
+
+/*
+
+//====================================== 카링 ======================================
+
+
+
+
+
+UOSP.sendKalingImage = function sendKalingImage(room, imageURL, URL, description,button,width, height){
+	var kalingObj={
+		"link_ver": "4.0",
+		"template_object": {
+			"object_type": "feed",
+			"content": {
+				"title": "",
+				"image_url": imageURL,
+				"image_width": width||0,
+				"image_height": height||0,
+				"link": {
+					"web_url": URL,
+					"mobile_web_url": URL
+				},
+				"description": description || ""
+			},
+			"buttons": [{
+				"title": button || "",
+				"link": {
+					"web_url": URL,
+					"mobile_web_url": URL
+				}
+			}]
+		}
+	};
+	try{
+		Kakao.send(room, kalingObj );
+	}catch(e){
+		UOSP.kakaoReset();
+		Kakao.send(room, kalingObj );
+	}
+
+}
+
+//========================================= 카링 끝 =========================================
+
+
+ */
