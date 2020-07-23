@@ -222,7 +222,7 @@ Object.defineProperty(Object.prototype,"$$",   {
 });
 
 
-/*
+
 
 var switcher = 1 // 스레드 통제 관련 변수 (0되면 모두 OFF)
 
@@ -265,7 +265,7 @@ UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 	}
 }), "katalkbot_thread_UOSP1");
 
- */
+
 
 
 
