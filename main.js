@@ -241,8 +241,12 @@ UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 					var date = new Date();
 					//if( date.getHours()>8 || date.getHours()<22 ){
 					if(true){
+						Api.replyRoom(console_room_name,"UOSP1 실행 시작");
+						timer.start();
 						UOSP.UOSP1()
-						Api.replyRoom(console_room_name,"UOSP1 실행");
+						var time = timer.end();
+						msg = "경과시간: " + java.lang.String.format("UOSP1 실행시간 : %.2f",time/1000) + "초";
+						Api.replyRoom(console_room_name,msg);
 					}
 				}
 				catch(e){
