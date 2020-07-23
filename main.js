@@ -239,9 +239,7 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 
 				try{
 					var date = new Date();
-					//if( date.getHours()>8 || date.getHours()<22 ){
-					if(true){
-						Api.replyRoom(console_room_name,"UOSP1 실행 시작");
+					if( date.getHours()>8 || date.getHours()<22 ){
 						UOSP.UOSP1()
 					}
 				}
