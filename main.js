@@ -285,6 +285,8 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						SW = 1
 					}
 					if( date.getHours()>8 && date.getHours()<22 ){
+						try{ UOSP.UOSP2() }catch(e){}
+
 						try{ UOSP.UOS_temp_controller("1") }catch(e){}
 						try{ UOSP.UOS_temp_controller("2") }catch(e){}
 						try{ UOSP.UOS_temp_controller("3") }catch(e){}
