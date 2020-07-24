@@ -18,6 +18,7 @@ UOSP = require("UOSP.js")
 DCP = require("DCP.js")
 Git = require("Git.js")
 Metro = require("Metro.js")
+UOS_library = require("UOS_library.js")
 D = require("DBManager.js")
 var myDB = android.database.sqlite.SQLiteDatabase.openDatabase("/sdcard/katalkbot/Bots/main/DB", null, android.database.sqlite.SQLiteDatabase.CREATE_IF_NECESSARY);
 
@@ -34,6 +35,30 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			start=0;
 		}
 
+		var r = {replier: replier, m: msg, msg: msg, s: sender, sender: sender, r: room, room: room, g: isGroupChat, i: imageDB, imageDB:imageDB,
+			reply: function (str) {
+				this.replier.reply(new String(str).encoding().rmspace());
+			},
+			intervalReply: function (tag, msg, interval) {
+				var lastTime = getNum("__intervalReply__" + tag);
+				var currentTime = new Date().valueOf();
+				if (lastTime == 0 || currentTime - lastTime >= interval * 1000) {
+					this.reply(msg);
+					setDB("__intervalReply__" + tag, currentTime);
+					return true;
+				} else {
+					return false;
+				}
+			},
+			replyRoom:function(room,str){
+				var replier;
+				if((replier=ObjKeep.get("replier."+room))!=null) {
+					ObjKeep.get("replier."+room).reply(new String(str).encoding().rmspace());
+					return true;
+				} else return false;
+			}
+		};
+
 
 		// eval 코드
 		if(msg.indexOf(">")==0){
@@ -44,6 +69,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			replier.reply("웅앙맨 외에 신은 없고 흰머리오목눈이는 그의 사도다.")
 		}
 
+		// ========================== 학교 관련 기능 ================================
 
 		if(msg.indexOf("/공지검색")==0){
 			replier.reply(UOSP.UOSP1_search(msg.substr(6)))
@@ -51,6 +77,13 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		if(msg.indexOf("/학사공지검색")==0){
 			replier.reply(UOSP.UOSP2_search(msg.substr(8)))
 		}
+
+		if(msg=="/중도"){r.reply(UOS_library.displayLibSeat(room))}
+
+		// =========================================================================
+
+		if(msg.indexOf("/전철")){r.reply(Metro.output(room,msg.substr(4)))}
+
 
 		if(msg.indexOf("/시갤검색글쓴이")==0){
 			replier.reply(DCP.UOS_search(msg.substr(9),"writer"))
