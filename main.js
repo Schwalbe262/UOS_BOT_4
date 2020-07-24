@@ -282,13 +282,12 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						SW = 1
 					}
 					if( date.getHours()>8 && date.getHours()<22 ){
-						UOSP.UOS_temp_controller("1")
-						UOSP.UOS_temp_controller("2")
-						UOSP.UOS_temp_controller("3")
-						UOSP.UOS_temp_controller("4")
-						UOSP.UOS_temp_controller("5")
-						UOSP.UOS_temp_controller("6")
-						UOSP.UOS_temp_controller("7")
+						UOSP.UOS_temp_controller_engineering("1")
+						UOSP.UOS_temp_controller_engineering("2")
+						UOSP.UOS_temp_controller_engineering("3")
+						UOSP.UOS_temp_controller_engineering("4")
+						UOSP.UOS_temp_controller_engineering("5")
+						UOSP.UOS_temp_controller_engineering("6")
 						if(SW==1){
 							UOSP.UOS_temp_controller("1","ON")
 							SW = 2
