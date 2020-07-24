@@ -294,6 +294,11 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						UOSP.UOS_temp_controller("10")
 						UOSP.UOS_temp_controller("11")
 						UOSP.UOS_temp_controller("12")
+						UOSP.UOS_temp_controller("13")
+						UOSP.UOS_temp_controller("14")
+						UOSP.UOS_temp_controller("15")
+						UOSP.UOS_temp_controller("16")
+						UOSP.UOS_temp_controller("17")
 						if(SW==1){
 							UOSP.UOS_temp_controller("1","ON")
 							SW = 2
