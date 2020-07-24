@@ -287,16 +287,19 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						UOSP.UOS_temp_controller("3")
 						UOSP.UOS_temp_controller("4")
 						UOSP.UOS_temp_controller("5")
+						java.lang.Thread.sleep(1000)
 						UOSP.UOS_temp_controller("6")
 						UOSP.UOS_temp_controller("7")
 						UOSP.UOS_temp_controller("8")
 						UOSP.UOS_temp_controller("9")
 						UOSP.UOS_temp_controller("10")
+						java.lang.Thread.sleep(1000)
 						UOSP.UOS_temp_controller("11")
 						UOSP.UOS_temp_controller("12")
 						UOSP.UOS_temp_controller("13")
 						UOSP.UOS_temp_controller("14")
 						UOSP.UOS_temp_controller("15")
+						java.lang.Thread.sleep(1000)
 						UOSP.UOS_temp_controller("16")
 						UOSP.UOS_temp_controller("17")
 						Api.replyRoom(console_room_name,"웅앙맨1");
@@ -304,6 +307,7 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						Api.replyRoom(console_room_name,"웅앙맨2");
 						UOSP.UOS_temp_controller("19")
 						UOSP.UOS_temp_controller("20")
+						java.lang.Thread.sleep(1000)
 						UOSP.UOS_temp_controller("21")
 						UOSP.UOS_temp_controller("22")
 						if(SW==1){
