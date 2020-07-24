@@ -82,7 +82,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		// =========================================================================
 
-		if(msg.indexOf("/전철")){r.reply(Metro.output(room,msg.substr(4)))}
+		if(msg.indexOf("/전철")==0){r.reply(Metro.output(room,msg.substr(4)))}
 
 
 		if(msg.indexOf("/시갤검색글쓴이")==0){
