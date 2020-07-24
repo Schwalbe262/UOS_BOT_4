@@ -267,7 +267,7 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 		let SW = 0 // 0 : 꺼짐, 1 : 작동대기, 2 : 작동후
 		//var is_printed = false
 		try{
-			Api.replyRoom(console_room_name,"공과대학공지 파싱 스레드 실행")
+			Api.replyRoom(console_room_name,"학과공지 파싱 스레드 실행")
 			while(1){
 				if(switcher == 0){
 					break
@@ -317,10 +317,10 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 				java.lang.Thread.sleep(300000) //10sec
 			}
 		}catch(e){
-			Api.replyRoom(console_room_name,"공과대학공지 파싱 스레드 error\n"+e + "\n" + e.stack + "\n"+e.rhinoException);
+			Api.replyRoom(console_room_name,"학과공지 파싱 스레드 error\n"+e + "\n" + e.stack + "\n"+e.rhinoException);
 		}
 		finally{
-			Api.replyRoom(console_room_name,"공과대학공지 파싱 스레드 종료")
+			Api.replyRoom(console_room_name,"학과공지 파싱 스레드 종료")
 		}
 	}
 }), "katalkbot_thread_UOSP_control");
