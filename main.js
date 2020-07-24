@@ -282,28 +282,28 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						SW = 1
 					}
 					if( date.getHours()>8 && date.getHours()<22 ){
-						UOSP.UOS_temp_controller("1")
-						UOSP.UOS_temp_controller("2")
-						UOSP.UOS_temp_controller("3")
-						UOSP.UOS_temp_controller("4")
-						UOSP.UOS_temp_controller("5")
-						UOSP.UOS_temp_controller("6")
-						UOSP.UOS_temp_controller("7")
-						UOSP.UOS_temp_controller("8")
-						UOSP.UOS_temp_controller("9")
-						UOSP.UOS_temp_controller("10")
-						UOSP.UOS_temp_controller("11")
-						UOSP.UOS_temp_controller("12")
-						UOSP.UOS_temp_controller("13")
-						UOSP.UOS_temp_controller("14")
-						UOSP.UOS_temp_controller("15")
-						UOSP.UOS_temp_controller("16")
-						UOSP.UOS_temp_controller("17")
-						UOSP.UOS_temp_controller("18")
-						UOSP.UOS_temp_controller("19")
-						UOSP.UOS_temp_controller("20")
-						UOSP.UOS_temp_controller("21")
-						UOSP.UOS_temp_controller("22")
+						try{ UOSP.UOS_temp_controller("1") }catch(e){}
+						try{ UOSP.UOS_temp_controller("2") }catch(e){}
+						try{ UOSP.UOS_temp_controller("3") }catch(e){}
+						try{ UOSP.UOS_temp_controller("4") }catch(e){}
+						try{ UOSP.UOS_temp_controller("5") }catch(e){}
+						try{ UOSP.UOS_temp_controller("6") }catch(e){}
+						try{ UOSP.UOS_temp_controller("7") }catch(e){}
+						try{ UOSP.UOS_temp_controller("8") }catch(e){}
+						try{ UOSP.UOS_temp_controller("9") }catch(e){}
+						try{ UOSP.UOS_temp_controller("10") }catch(e){}
+						try{ UOSP.UOS_temp_controller("11") }catch(e){}
+						try{ UOSP.UOS_temp_controller("12") }catch(e){}
+						try{ UOSP.UOS_temp_controller("13") }catch(e){}
+						try{ UOSP.UOS_temp_controller("14") }catch(e){}
+						try{ UOSP.UOS_temp_controller("15") }catch(e){}
+						try{ UOSP.UOS_temp_controller("16") }catch(e){}
+						try{ UOSP.UOS_temp_controller("17") }catch(e){}
+						try{ UOSP.UOS_temp_controller("18") }catch(e){}
+						try{ UOSP.UOS_temp_controller("19") }catch(e){}
+						try{ UOSP.UOS_temp_controller("20") }catch(e){}
+						try{ UOSP.UOS_temp_controller("21") }catch(e){}
+						try{ UOSP.UOS_temp_controller("22") }catch(e){}
 						if(SW==1){
 							UOSP.UOS_temp_controller("1","ON")
 							SW = 2
