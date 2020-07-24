@@ -301,10 +301,11 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						UOSP.UOS_temp_controller("15")
 						java.lang.Thread.sleep(1000)
 						UOSP.UOS_temp_controller("16")
-						UOSP.UOS_temp_controller("17")
 						Api.replyRoom(console_room_name,"웅앙맨1");
-						UOSP.UOS_temp_controller("18")
+						UOSP.UOS_temp_controller("17")
 						Api.replyRoom(console_room_name,"웅앙맨2");
+						UOSP.UOS_temp_controller("18")
+						Api.replyRoom(console_room_name,"웅앙맨3");
 						UOSP.UOS_temp_controller("19")
 						UOSP.UOS_temp_controller("20")
 						java.lang.Thread.sleep(1000)
