@@ -282,21 +282,20 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 						SW = 1
 					}
 					if( date.getHours()>8 && date.getHours()<22 ){
-						UOSP.UOS_temp_controller_engineering("1")
-						UOSP.UOS_temp_controller_engineering("2")
-						UOSP.UOS_temp_controller_engineering("3")
-						UOSP.UOS_temp_controller_engineering("4")
-						UOSP.UOS_temp_controller_engineering("5")
-						UOSP.UOS_temp_controller_engineering("6")
-						UOSP.UOS_temp_controller_biz()
-						UOSP.UOS_temp_controller_social("1")
-						UOSP.UOS_temp_controller_social("2")
-						UOSP.UOS_temp_controller_social("3")
-						UOSP.UOS_temp_controller_social("4")
-						UOSP.UOS_temp_controller_social("5")
+						UOSP.UOS_temp_controller("1")
+						UOSP.UOS_temp_controller("2")
+						UOSP.UOS_temp_controller("3")
+						UOSP.UOS_temp_controller("4")
+						UOSP.UOS_temp_controller("5")
+						UOSP.UOS_temp_controller("6")
+						UOSP.UOS_temp_controller("7")
+						UOSP.UOS_temp_controller("8")
+						UOSP.UOS_temp_controller("9")
+						UOSP.UOS_temp_controller("10")
+						UOSP.UOS_temp_controller("11")
+						UOSP.UOS_temp_controller("12")
 						if(SW==1){
-							UOSP.UOS_temp_controller_engineering("1","ON")
-							UOSP.UOS_temp_controller_social("1","ON")
+							UOSP.UOS_temp_controller("1","ON")
 							SW = 2
 						}
 					}
