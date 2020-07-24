@@ -17,6 +17,7 @@ var start = 1
 UOSP = require("UOSP.js")
 DCP = require("DCP.js")
 Git = require("Git.js")
+Metro = require("Metro.js")
 D = require("DBManager.js")
 var myDB = android.database.sqlite.SQLiteDatabase.openDatabase("/sdcard/katalkbot/Bots/main/DB", null, android.database.sqlite.SQLiteDatabase.CREATE_IF_NECESSARY);
 
