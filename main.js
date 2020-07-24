@@ -287,32 +287,18 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 					if( date.getHours()>8 && date.getHours()<22 ){
 						try{ UOSP.UOSP2() }catch(e){}
 
-						try{ UOSP.UOS_temp_controller("1") }catch(e){}
-						try{ UOSP.UOS_temp_controller("2") }catch(e){}
-						try{ UOSP.UOS_temp_controller("3") }catch(e){}
-						try{ UOSP.UOS_temp_controller("4") }catch(e){}
-						try{ UOSP.UOS_temp_controller("5") }catch(e){}
-						try{ UOSP.UOS_temp_controller("6") }catch(e){}
-						try{ UOSP.UOS_temp_controller("7") }catch(e){}
-						try{ UOSP.UOS_temp_controller("8") }catch(e){}
-						try{ UOSP.UOS_temp_controller("9") }catch(e){}
-						try{ UOSP.UOS_temp_controller("10") }catch(e){}
-						try{ UOSP.UOS_temp_controller("11") }catch(e){}
-						try{ UOSP.UOS_temp_controller("12") }catch(e){}
-						try{ UOSP.UOS_temp_controller("13") }catch(e){}
-						try{ UOSP.UOS_temp_controller("14") }catch(e){}
-						try{ UOSP.UOS_temp_controller("15") }catch(e){}
-						try{ UOSP.UOS_temp_controller("16") }catch(e){}
-						try{ UOSP.UOS_temp_controller("17") }catch(e){}
-						try{ UOSP.UOS_temp_controller("18") }catch(e){}
-						try{ UOSP.UOS_temp_controller("19") }catch(e){}
-						try{ UOSP.UOS_temp_controller("20") }catch(e){}
-						try{ UOSP.UOS_temp_controller("21") }catch(e){}
-						try{ UOSP.UOS_temp_controller("22") }catch(e){}
+						for(let i=0 ; i<23 ; i++){
+							try{
+								UOSP.UOS_temp_controller(String(i))
+								java.lang.Thread.sleep(1000)
+							} catch(e){}
+						}
+
 						if(SW==1){
 							UOSP.UOS_temp_controller("1","ON")
 							SW = 2
 						}
+
 					}
 				}
 				catch(e){
