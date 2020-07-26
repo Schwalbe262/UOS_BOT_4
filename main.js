@@ -71,6 +71,17 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
 		// ========================== 학교 관련 기능 ================================
 
+		//==============================================================================================================
+		//======================================== 공지 =================================================================
+
+		if(msg=="/일반공지"){ UOSP.UOSP1_list(room) }
+		else if(msg=="/학사공지"){ UOSP.UOSP2_list(room) }
+		else if(msg=="/채용공지"){ UOSP.UOSP3_list(room) }
+		else if(msg=="/창업공지"){ UOSP.UOSP4_list(room) }
+		else if(msg=="/장학공지"){ UOSP.UOSP5_list(room) }
+		else if(msg=="/시설공사공지"||msg=="/시설공지"){ UOSP.UOSP6_list(room) }
+		else if(msg.indexOf("/")!=-1&&msg.indexOf("공지")!=-1){ UOSP.UOSP_depart_check(room,msg.substr(1).replace("공지","")) }
+
 		if(msg.indexOf("/공지검색")==0){
 			replier.reply(UOSP.UOSP1_search(msg.substr(6)))
 		}
