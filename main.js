@@ -278,7 +278,9 @@ thread_UOSP1 = new java.lang.Thread(new java.lang.Runnable({
 				try{
 					var date = new Date();
 					if( date.getHours()>8 && date.getHours()<22 ){
-						UOSP.UOSP1()
+						try{ UOSP.UOSP1() }catch(e){}
+						java.lang.Thread.sleep(1000)
+						try{ UOSP.UOSP2() }catch(e){}
 					}
 				}
 				catch(e){
@@ -312,19 +314,23 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 
 				try{
 					var date = new Date();
-					if( (date.getHours()==12||date.getHours()==15||date.getHours()==18) && SW == 2 ){
-						SW = 0
-					}
-					if( (date.getHours()==11||date.getHours()==14||date.getHours()==17) && SW == 0 ){
-						SW = 1
-					}
+					if( (date.getHours()==12||date.getHours()==15||date.getHours()==18) && SW == 2 ){SW = 0} // 작동후 상태 -> 꺼짐 상태
+					if( (date.getHours()==11||date.getHours()==14||date.getHours()==17) && SW == 0 ){SW = 1} // 꺼짐 상태 -> 작동대기 상태
 					if( date.getHours()>8 && date.getHours()<22 ){
-						try{ UOSP.UOSP2() }catch(e){}
 
-						for(let i=0 ; i<23 ; i++){
+						try{ UOSP.UOSP3() }catch(e){}
+						java.lang.Thread.sleep(5000)
+						try{ UOSP.UOSP4() }catch(e){}
+						java.lang.Thread.sleep(5000)
+						try{ UOSP.UOSP5() }catch(e){}
+						java.lang.Thread.sleep(5000)
+						try{ UOSP.UOSP5() }catch(e){}
+						java.lang.Thread.sleep(5000)
+
+						for(let i=1 ; i<23 ; i++){
 							try{
 								UOSP.UOS_temp_controller(String(i))
-								java.lang.Thread.sleep(1000)
+								java.lang.Thread.sleep(3000)
 							} catch(e){}
 						}
 
