@@ -97,7 +97,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		if(msg.indexOf("/시간표상세검색")==0){
 			let temp = UOS_time.UOS_Time_DB_search_toString_detail(msg.substr(9),room)
 			r.reply(temp[0])
-			if(temp[1]!=undefined){
+			if(temp[2]!=undefined){
 				r.reply(temp[1])
 				r.reply(temp[2])
 				r.reply(temp[3])
