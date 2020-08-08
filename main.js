@@ -89,11 +89,15 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			replier.reply(UOSP.UOSP2_search(msg.substr(8)))
 		}
 
-		if(msg=="/중도"){r.reply(UOS_library.displayLibSeat(room))}
+		if(msg=="/중도"){
+			UOS_library.displayLibSeat(room)
+		}
 
 		// =========================================================================
 
-		if(msg.indexOf("/전철")==0){r.reply(Metro.output(room,msg.substr(4)))}
+		if(msg.indexOf("/전철")==0){
+			Metro.output(room,msg.substr(4))
+		}
 
 
 		if(msg.indexOf("/시갤검색글쓴이")==0){
@@ -421,3 +425,93 @@ UOSP.sendKalingImage = function sendKalingImage(room, imageURL, URL, description
 
 
  */
+
+
+
+Date.prototype.date_format = function (f) {
+	if (!this.valueOf()) return " ";
+
+	var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+	var weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
+	var weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	var weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+	var d = this;
+
+	return f.replace(/(yyyy|yy|MM|dd|KS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
+
+		switch ($1) {
+			case "yyyy": return d.getFullYear(); // 년 (4자리)
+			case "yy": return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
+			case "MM": return (d.getMonth() + 1).zf(2); // 월 (2자리)
+			case "dd": return d.getDate().zf(2); // 일 (2자리)
+			case "KS": return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
+			case "KL": return weekKorName[d.getDay()]; // 요일 (긴 한글)
+			case "ES": return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
+			case "EL": return weekEngName[d.getDay()]; // 요일 (긴 영어)
+			case "HH": return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
+			case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
+			case "mm": return d.getMinutes().zf(2); // 분 (2자리)
+			case "ss": return d.getSeconds().zf(2); // 초 (2자리)
+			case "a/p": return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
+			default: return $1;
+		}
+	});
+};
+String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
+String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
+Number.prototype.zf = function (len) { return this.toString().zf(len); };
+// JSON HTML '깨짐 방지코드
+String.prototype.replaceAmp=function(){
+	var res=this.toString();
+	var tmp;
+	while(tmp=/&#x....;/.exec(res)){
+		res=res.replace(tmp[0],String.fromCharCode(parseInt(tmp[0].substr(3,4),16)));
+	}
+	while(tmp=/&#..;/.exec(res)){
+		res=res.replace(tmp[0],String.fromCharCode(parseInt(tmp[0].substr(2,2))));
+	}
+	return res.replace(/&nbsp;/g,"\t").replace(/&gt;/g,">").replace(/&lt;/g,"<").replace(/&quot;/g,'"').replace(/&amp;/g,"&").replace(/&#034;/g,"\"");
+}
+// 문장 맨 끝 공백 해결 코드
+String.prototype.rmspace=function() {
+	return this.toString().replace(/^\s*/, "").replace(/\s*$/, "");
+}
+// 학식 코드
+Object.defineProperty(String.prototype,"includess",{
+	value:function(){
+		for (var i = 0; i < arguments.length; i++) {
+			if(this.toString().includes(arguments[i])) return true;
+		}
+		return false;
+	}
+});
+String.blank=function (length) {
+	length = length || 500;
+	return String.fromCharCode(8237).repeat(length);
+}
+String.prototype.받침=function(){
+	var lastCharCode=this.toString().charCodeAt(this.toString().length-1);
+	if(lastCharCode>="가".charCodeAt(0) && lastCharCode<="힣".charCodeAt(0)){
+		if((lastCharCode-"가".charCodeAt(0))%28==0) return false;
+		else return true;
+	}else return false;
+}
+String.prototype.은는=function(){
+	return this.toString().받침() ? this.toString()+"은" : this.toString()+"는";
+}
+String.prototype.이가=function(){
+	return this.toString().받침() ? this.toString()+"이" : this.toString()+"가";
+}
+String.prototype.과와=function(){
+	return this.toString().받침() ? this.toString()+"과" : this.toString()+"와";
+}
+String.prototype.을를=function(){
+	return this.toString().받침() ? this.toString()+"을" : this.toString()+"를";
+}
+String.prototype.아야=function(){
+	return this.toString().받침() ? this.toString()+"아" : this.toString()+"야";
+}
+String.prototype.date = function(){
+	return Number(this)<10 ? "0"+this.toString() : this.toString();
+}
