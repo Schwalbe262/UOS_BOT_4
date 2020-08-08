@@ -94,6 +94,16 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		if(msg.indexOf("/시간표검색")==0){
 			r.reply(UOS_time.UOS_Time_DB_search_toString(msg,room).rmspace())
 		}
+		if(msg.indexOf("/시간표상세검색")==0){
+			let temp = UOS_time.UOS_Time_DB_search_toString_detail(r.reply.substr(9),room)
+			r.reply(temp[0])
+			if(temp[1]!=undefined){
+				r.reply(temp[1])
+				r.reply(temp[2])
+				r.reply(temp[3])
+				r.reply(temp[4])
+			}
+		}
 
 		if(msg=="/중도"){
 			UOS_library.displayLibSeat(room)
