@@ -74,7 +74,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		// ========================== 학교 관련 기능 ================================
 
 		//==============================================================================================================
-		//======================================== 공지 =================================================================
+		//==================================== 학교 정보 관련 기능 ========================================================
 
 		if(msg=="/일반공지"){ UOSP.UOSP1_list(room) }
 		else if(msg=="/학사공지"){ UOSP.UOSP2_list(room) }
@@ -91,6 +91,81 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			replier.reply(UOSP.UOSP2_search(msg.substr(8)))
 		}
 
+		//==============================================================================================================
+		//==================================== 학교 공지 관련 기능 ========================================================
+
+		if(msg.indexOf("/건물번호")!=-1){
+			if(msg.substring(6)=="1"||msg.substring(6).I("전농관")){replier.reply("1.전농관")}
+			else if(msg.substring(6)=="2"||msg.substring(6).I("1공학관")){replier.reply("2.제 1공학관")}
+			else if(msg.substring(6)=="3"||msg.substring(6).I("건공관")||msg.substring(6).I("건설공학관")){replier.reply("3.건설공학관")}
+			else if(msg.substring(6)=="4"||msg.substring(6).I("창공관")){replier.reply("4.창공관")}
+			else if(msg.substring(6)=="5"||msg.substring(6).I("인문학관")||msg.substring(6).I("인문관")){replier.reply("5.인문학관")}
+			else if(msg.substring(6)=="6"||msg.substring(6).I("배봉관")){replier.reply("6.배봉관")}
+			else if(msg.substring(6)=="7"||msg.substring(6).I("대학본부")||msg.substring(6).I("본부")){replier.reply("7.대학본부")}
+			else if(msg.substring(6)=="8"||msg.substring(6).I("자과관")||msg.substring(6).I("자연과학관")){replier.reply("8.자연과학관")}
+			else if(msg.substring(6)=="9"||msg.substring(6).I("음악관")){replier.reply("9.음악관")}
+			else if(msg.substring(6)=="10"||msg.substring(6).I("경농관")){replier.reply("10.경농관")}
+			else if(msg.substring(6)=="11"||msg.substring(6).I("2공학관")){replier.reply("11.제 2공학관")}
+			else if(msg.substring(6)=="12"||msg.substring(6).I("학생회관")||msg.substring(6).I("학관")){replier.reply("12.학생회관")}
+			else if(msg.substring(6)=="13"||msg.substring(6).I("학군단")){replier.reply("13.학군단")}
+			else if(msg.substring(6)=="14"||msg.substring(6).I("과학기술관")||msg.substring(6).I("과기관")){replier.reply("14.과학기술관")}
+			else if(msg.substring(6)=="15"||msg.substring(6).I("21세기관")){replier.reply("15.21세기관")}
+			else if(msg.substring(6)=="16"||msg.substring(6).I("조형관")){replier.reply("16.조형관")}
+			else if(msg.substring(6)=="17"||msg.substring(6).I("100주년")||msg.substring(6).I("시민문화")){replier.reply("17.시민문화교육관")}
+			else if(msg.substring(6)=="18"||msg.substring(6).I("자작마루")){replier.reply("18.자작마루")}
+			else if(msg.substring(6)=="19"||msg.substring(6).I("정보기술관")||msg.substring(6).I("정기관")){replier.reply("19.정보기술관")}
+			else if(msg.substring(6)=="20"||msg.substring(6).I("법학관")){replier.reply("20.법학관")}
+			else if(msg.substring(6)=="21"||msg.substring(6).I("중도")||msg.substring(6).I("중앙도서관")){replier.reply("21.중앙도서관")}
+			else if(msg.substring(6)=="22"||msg.substring(6).I("생활관")||msg.substring(6).I("기숙사")){replier.reply("22.생활관")}
+			else if(msg.substring(6)=="23"){replier.reply("23.건축구조실험동")}
+			else if(msg.substring(6)=="24"){replier.reply("24.토목구조실험동")}
+			else if(msg.substring(6)=="25"||msg.substring(6).I("미디어관")){replier.reply("25.미디어관")}
+			else if(msg.substring(6)=="26"){replier.reply("26.자동화온실")}
+			else if(msg.substring(6)=="27"||msg.substring(6).I("강당")){replier.reply("27.대강당")}
+			else if(msg.substring(6)=="28"){replier.reply("28.운동장")}
+			else if(msg.substring(6)=="29"){replier.reply("29.박물관")}
+			else if(msg.substring(6)=="30"||msg.substring(6).I("정문")){replier.reply("30.정문")}
+			else if(msg.substring(6)=="31"||msg.substring(6).I("후문")){replier.reply("31.후문")}
+			else if(msg.substring(6)=="32"||msg.substring(6).I("웰니스")){replier.reply("32.웰니스센터")}
+			else if(msg.substring(6)=="33"||msg.substring(6).I("미래관")){replier.reply("33.미래관")}
+			else if(msg.substring(6)=="34"||msg.substring(6).I("국제학사")||msg.substring(6).I("기숙사")){replier.reply("34.국제학사")}
+			else if(msg.substring(6)=="35"||msg.substring(6).I("배봉탕")||msg.substring(6).I("하늘못")){replier.reply("35.하늘못")}
+			else if(msg.substring(6)=="36"){replier.reply("36.어린이집")}
+			else if(msg.substring(6)=="37"||msg.substring(6).I("100주년")||msg.substring(6).I("시민문화")){replier.reply("37.시민문화교육관")}
+		}
+
+		if(msg.indexOf("/과사번호")==0){
+			if(msg.indexOf("행정")>0){r.reply("행정학과 : 02-6490-2010\n" + "21세기관(215호)")}
+			else if(msg.indexOf("국")>0&&msg.indexOf("관")>0){r.reply("국제관계학과 : 02-6490-2035\n" + "21세기관(213호)")}
+			else if(msg.indexOf("경제")>0){r.reply("경제학부 : 02-6490-2051\n" + "미래관(504호)")}
+			else if(msg.indexOf("사")>0&&msg.indexOf("복")>0){r.reply("사회복지학과 : 02-6490-2075\n" + "21세기관(406호)")}
+			else if(msg.indexOf("세무")>0){r.reply("세무학과 : 02-6490-2095\n" + "21세기관(411호)")}
+			else if(msg.indexOf("경영")>0){r.reply("경영학부 : 02-6490-2210~4")}
+			else if(msg.indexOf("전")>0&&msg.indexOf("컴")>0){r.reply("전자전기컴퓨터공학부 : 6490-2310")}
+			else if(msg.indexOf("화")>0&&msg.indexOf("공")>0){r.reply("화학공학과 : 6490-2360")}
+			else if(msg.indexOf("기")>0&&msg.indexOf("공")>0||msg.indexOf("기계")>0){r.reply("기계정보공학과 : 6490-2380")}
+			else if(msg.indexOf("신소재")>0){r.reply("신소재공학과 : 6490-2400")}
+			else if(msg.indexOf("토")>0&&msg.indexOf("공")>0||msg.indexOf("토목")>0){r.reply("토목공학과 : 6490-2420")}
+			else if(msg.indexOf("컴")>0&&msg.indexOf("과")>0){r.reply("컴퓨터과학부 : 6490-2440")}
+			else if(msg.indexOf("국")>0&&msg.indexOf("문")>0){r.reply("국어국문학과 : 6490-2530 or 6490-2534")}
+			else if(msg.indexOf("영")>0&&msg.indexOf("문")>0){r.reply("영어영문학과 : 6490-2510~2511 or 6490-2514")}
+			else if(msg.indexOf("국사")>0){r.reply("국사학과 : 6490-2551 or 6490-2554")}
+			else if(msg.indexOf("철학")>0){r.reply("철학과 : 6490-2570 or 6490-2574")}
+			else if(msg.indexOf("중")>0&&msg.indexOf("문")>0||msg.indexOf("중국어")>0){r.reply("중국어문화학과 : 6490-2586 or 6490-2589")}
+			else if(msg.indexOf("수학")>0){r.reply("수학과 : 02-6490-2606~7\n" + "미래관 8층")}
+			else if(msg.indexOf("통계")>0){r.reply("통계학과 : 02-6490-2625~6\n" + "미래관 7층")}
+			else if(msg.indexOf("물리")>0){r.reply("물리학과 : 02-6490-2640~1\n" + "과학기술관 2층")}
+			else if(msg.indexOf("생명")>0){r.reply("생명과학과 : 02-6490-2660~1\n" + "자연과학과 5층")}
+			else if(msg.indexOf("환경원")>0||msg.indexOf("환원")>0||msg.indexOf("원예")>0){r.reply("환경원예학과 : 02-6490-2680~1\n" + "자연과학과 4층")}
+			else if(msg.indexOf("도")>0||msg.indexOf("도시")>0){r.reply("도시과학대학  : 02-6490-2704")}
+			else if(msg.indexOf("스포츠")>0||msg.indexOf("스과")>0||msg.indexOf("음악")>0||msg.indexOf("환조")>0||msg.indexOf("조각")>0||msg.indexOf("산디")>0||msg.indexOf("공디")>0||msg.indexOf("디자인")>0){r.reply("예술체육대학  : 02-6490-2702")}
+			else if(msg.indexOf("자유")>0||msg.indexOf("자전")>0){r.reply("자유전공학부  : 6490-2126~7 or 6490-2129")}
+		}
+
+		if(msg=="/중도"){
+			UOS_library.displayLibSeat(room)
+		}
+
 		if(msg.indexOf("/시간표검색")==0){
 			r.reply(UOS_time.UOS_Time_DB_search_toString(msg,room).rmspace())
 		}
@@ -105,9 +180,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 			}
 		}
 
-		if(msg=="/중도"){
-			UOS_library.displayLibSeat(room)
-		}
+
 
 		// =========================================================================
 
@@ -116,12 +189,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 		}
 
 
-		if(msg.indexOf("/시갤검색글쓴이")==0){
-			replier.reply(DCP.UOS_search(msg.substr(9),"writer"))
-		}
-		else if(msg.indexOf("/시갤검색")==0){
-			replier.reply(DCP.UOS_search(msg.substr(6),"title"))
-		}
+
 
 
 
@@ -530,4 +598,9 @@ String.prototype.아야=function(){
 }
 String.prototype.date = function(){
 	return Number(this)<10 ? "0"+this.toString() : this.toString();
+}
+
+String.prototype.I=function(keyword){ // String에 keyword가 있는지 검사
+	if(this.includes(keyword)){return true}
+	else{return false}
 }
