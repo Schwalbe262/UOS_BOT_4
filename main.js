@@ -31,7 +31,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 	try {
 
 		if(start==1){
-			thread_UOSP1.start()
+			//thread_UOSP1.start()
 			thread_UOSP_control.start()
 			Api.replyRoom(console_room_name,"웅앙맨 외에 신은 없고 흰머리 오목눈이는 그의 사도다.");
 			start=0;
@@ -417,10 +417,10 @@ thread_UOSP_control = new java.lang.Thread(new java.lang.Runnable({
 					if( (date.getHours()==11||date.getHours()==14||date.getHours()==17) && SW == 0 ){SW = 1} // 꺼짐 상태 -> 작동대기 상태
 					if( date.getHours()>8 && date.getHours()<22 ){
 
-						try{ UOSP.UOSP3() }catch(e){}
-						java.lang.Thread.sleep(5000)
-						try{ UOSP.UOSP4() }catch(e){}
-						java.lang.Thread.sleep(5000)
+						//try{ UOSP.UOSP3() }catch(e){}
+						//java.lang.Thread.sleep(5000)
+						//try{ UOSP.UOSP4() }catch(e){}
+						//java.lang.Thread.sleep(5000)
 						try{ UOSP.UOSP5() }catch(e){}
 						java.lang.Thread.sleep(5000)
 						try{ UOSP.UOSP5() }catch(e){}
